@@ -79,6 +79,32 @@ int main(){
     mvprintw(13, 4, "Security and Users");
     mvprintw(14, 4, "Misc");
     attroff(COLOR_PAIR(6));
+
+
+    //Crear Tercera Caja
+    int x_panel2 = x_panel - 23;
+    WINDOW *panel_3 = newwin(12,x_panel2, 8,26);
+    wbkgd(panel_3, COLOR_PAIR(1));
+    attron(COLOR_PAIR(4));
+    box(panel_3, 0, 0);
+    attroff(COLOR_PAIR(4));
+    refresh();
+    wrefresh(panel_3);
+    wrefresh(ventana);
+
+    attron(COLOR_PAIR(3));//Color de primera linea en Caja 3
+    mvprintw(9, 27, "Patch CD Update");
+    attroff(COLOR_PAIR(3));
+
+    //Resto de Info
+    attron(COLOR_PAIR(6));
+    mvprintw(10, 27, "Installation into Directory");
+    mvprintw(11, 27, "Online Update");
+    mvprintw(12, 27, "Change Source of Installation");
+    mvprintw(13, 27, "System Update");
+    attroff(COLOR_PAIR(6));
+
+    
     move(20,20);
     getch();
     refresh();
