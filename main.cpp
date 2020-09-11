@@ -1,5 +1,4 @@
 #include <ncurses.h>
-#include <iostream>
 using namespace std;
 
 int main(){
@@ -20,6 +19,8 @@ int main(){
     init_pair(2, COLOR_BLACK, COLOR_CYAN);
     init_pair(3, COLOR_YELLOW, COLOR_BLUE);
     init_pair(4, COLOR_WHITE, COLOR_BLUE);
+    init_pair(5,COLOR_YELLOW, COLOR_CYAN);//Color de Palabara Software
+    init_pair(6, COLOR_WHITE, COLOR_BLUE);//Color de Resto de Palabras
     //Cambiar color a ventana
     wbkgd(ventana, COLOR_PAIR(1));
     refresh();
@@ -48,7 +49,7 @@ int main(){
     wrefresh(ventana);
 
     //Escribir lo que ve en la caja
-    int mitad_panel1_x = ((3 + x_panel )/ 2 ) -11;
+    int mitad_panel1_x = (x_panel / 2) - 5;
     int mitad_panel1_y = (3 + 5 )/ 2;
     attron(COLOR_PAIR(3));
     mvprintw(mitad_panel1_y, mitad_panel1_x ,"YaST2 Control Center");
@@ -56,7 +57,9 @@ int main(){
 
     //Crear segunda caja
     int y_caja2 = maximo_y - 12;
-    WINDOW *panel_2 = newwin(y_caja2,20,8,3);
+    int x_caja2 = 20;
+    int columna_caja2 = 3;
+    WINDOW *panel_2 = newwin(y_caja2,x_caja2,8,columna_caja2);
     wbkgd(panel_2, COLOR_PAIR(1));
     attron(COLOR_PAIR(4));
     box(panel_2, 0, 0);
@@ -64,28 +67,25 @@ int main(){
     refresh();
     wrefresh(panel_2);
     wrefresh(ventana);
-    //Color de Palabara Software
-    init_pair(5,COLOR_YELLOW, COLOR_CYAN);
-    //Color de Resto de Palabras
-    init_pair(6, COLOR_WHITE, COLOR_BLUE);
     attron(COLOR_PAIR(5));
-    mvprintw(9,4, "Software          ");
+    mvprintw(9,columna_caja2 + 1, "Software          ");
     attroff(COLOR_PAIR(5));
     
 
     attron(COLOR_PAIR(6));
-    mvprintw(10, 4, "Hardware");
-    mvprintw(11, 4, "System");
-    mvprintw(12, 4, "Network Devices");
-    mvprintw(13, 4, "Security and Users");
-    mvprintw(14, 4, "Misc");
+    mvprintw(10,columna_caja2 + 1, "Hardware");
+    mvprintw(11,columna_caja2 + 1, "System");
+    mvprintw(12,columna_caja2 + 1, "Network Devices");
+    mvprintw(13,columna_caja2 + 1, "Network Sevices");
+    mvprintw(14,columna_caja2 + 1, "Security and Users");
+    mvprintw(15,columna_caja2 + 1, "Misc");
     attroff(COLOR_PAIR(6));
-
 
     //Crear Tercera Caja
     int y_caja3 = maximo_y - 12;
-    int x_panel2 = x_panel - 23;
-    WINDOW *panel_3 = newwin(y_caja3,x_panel2, 8,26);
+    int x_panel2 = x_panel - 20;
+    int columna_inicial_caja3 = x_caja2 + 3;
+    WINDOW *panel_3 = newwin(y_caja3,x_panel2, 8,columna_inicial_caja3);
     wbkgd(panel_3, COLOR_PAIR(1));
     attron(COLOR_PAIR(4));
     box(panel_3, 0, 0);
@@ -95,15 +95,16 @@ int main(){
     wrefresh(ventana);
 
     attron(COLOR_PAIR(3));//Color de primera linea en Caja 3
-    mvprintw(9, 27, "Patch CD Update");
+    mvprintw(9, 31, "Patch CD Update");
     attroff(COLOR_PAIR(3));
 
     //Resto de Info
     attron(COLOR_PAIR(6));
-    mvprintw(10, 27, "Installation into Directory");
-    mvprintw(11, 27, "Online Update");
-    mvprintw(12, 27, "Change Source of Installation");
-    mvprintw(13, 27, "System Update");
+    mvprintw(10, columna_inicial_caja3 + 1, "Installation into Directory");
+    mvprintw(11, columna_inicial_caja3 + 1, "Online Update");
+    mvprintw(12, columna_inicial_caja3 + 1, "Install and Remove Software");
+    mvprintw(13, columna_inicial_caja3 + 1, "Change Source of Installation");
+    mvprintw(14, columna_inicial_caja3 + 1, "System Update");
     attroff(COLOR_PAIR(6));
 
 
@@ -123,14 +124,13 @@ int main(){
     mvprintw(y_comandos_abajo, x_comando_quit + 2, "uit]");
     attroff(COLOR_PAIR(6));
 
-    //Pintar error que salia en negro entre palabras
+    //Pintar error que salia en negro espacio entre las palabras
     attron(COLOR_PAIR(1));
-    for (int i = 10; i < x_comando_quit; i++){
+    for (int i = 10; i < x_comando_quit; i++)
         mvprintw(y_comandos_abajo, i, " ");
-    }
 
-
-    move(20,20);
+    attroff(COLOR_PAIR(1));
+    move(y_comandos_abajo,x_comando_quit + 6);
     getch();
     refresh();
     endwin();
