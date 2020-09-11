@@ -95,7 +95,7 @@ int main(){
     wrefresh(ventana);
 
     attron(COLOR_PAIR(3));//Color de primera linea en Caja 3
-    mvprintw(9, 31, "Patch CD Update");
+    mvprintw(9, columna_inicial_caja3 + 1, "Patch CD Update");
     attroff(COLOR_PAIR(3));
 
     //Resto de Info
