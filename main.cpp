@@ -55,7 +55,8 @@ int main(){
     attroff(COLOR_PAIR(3));
 
     //Crear segunda caja
-    WINDOW *panel_2 = newwin(12,20,8,3);
+    int y_caja2 = maximo_y - 12;
+    WINDOW *panel_2 = newwin(y_caja2,20,8,3);
     wbkgd(panel_2, COLOR_PAIR(1));
     attron(COLOR_PAIR(4));
     box(panel_2, 0, 0);
@@ -82,8 +83,9 @@ int main(){
 
 
     //Crear Tercera Caja
+    int y_caja3 = maximo_y - 12;
     int x_panel2 = x_panel - 23;
-    WINDOW *panel_3 = newwin(12,x_panel2, 8,26);
+    WINDOW *panel_3 = newwin(y_caja3,x_panel2, 8,26);
     wbkgd(panel_3, COLOR_PAIR(1));
     attron(COLOR_PAIR(4));
     box(panel_3, 0, 0);
@@ -104,7 +106,30 @@ int main(){
     mvprintw(13, 27, "System Update");
     attroff(COLOR_PAIR(6));
 
-    
+
+    int y_comandos_abajo = maximo_y - 3;
+    int x_comando_quit = x_panel - 4;
+    attron(COLOR_PAIR(3));//Colorear a la H y la Q
+    mvprintw(y_comandos_abajo, 5, "H");
+    mvprintw(y_comandos_abajo,x_comando_quit + 1, "Q");
+    attroff(COLOR_PAIR(3));
+
+    attron(COLOR_PAIR(6));
+    //Escribir resto de [Help]
+    mvprintw(y_comandos_abajo, 4, "[");
+    mvprintw(y_comandos_abajo, 6, "elp]");
+    //Escribir resto de [Quit]
+    mvprintw(y_comandos_abajo, x_comando_quit, "[");
+    mvprintw(y_comandos_abajo, x_comando_quit + 2, "uit]");
+    attroff(COLOR_PAIR(6));
+
+    //Pintar error que salia en negro entre palabras
+    attron(COLOR_PAIR(1));
+    for (int i = 10; i < x_comando_quit; i++){
+        mvprintw(y_comandos_abajo, i, " ");
+    }
+
+
     move(20,20);
     getch();
     refresh();
