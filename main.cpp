@@ -59,7 +59,7 @@ int main(){
     int y_caja2 = maximo_y - 12;
     int x_caja2 = 20;
     int columna_caja2 = 3;
-    WINDOW *panel_2 = newwin(y_caja2,x_caja2,8,columna_caja2);
+    WINDOW *panel_2 = newwin(y_caja2,x_caja2,6,columna_caja2);
     wbkgd(panel_2, COLOR_PAIR(1));
     attron(COLOR_PAIR(4));
     box(panel_2, 0, 0);
@@ -68,24 +68,23 @@ int main(){
     wrefresh(panel_2);
     wrefresh(ventana);
     attron(COLOR_PAIR(5));
-    mvprintw(9,columna_caja2 + 1, "Software          ");
+    mvprintw(7,columna_caja2 + 1, "Software          ");
     attroff(COLOR_PAIR(5));
     
-
     attron(COLOR_PAIR(6));
-    mvprintw(10,columna_caja2 + 1, "Hardware");
-    mvprintw(11,columna_caja2 + 1, "System");
-    mvprintw(12,columna_caja2 + 1, "Network Devices");
-    mvprintw(13,columna_caja2 + 1, "Network Sevices");
-    mvprintw(14,columna_caja2 + 1, "Security and Users");
-    mvprintw(15,columna_caja2 + 1, "Misc");
+    mvprintw(8,columna_caja2 + 1, "Hardware");
+    mvprintw(9,columna_caja2 + 1, "System");
+    mvprintw(10,columna_caja2 + 1, "Network Devices");
+    mvprintw(11,columna_caja2 + 1, "Network Sevices");
+    mvprintw(12,columna_caja2 + 1, "Security and Users");
+    mvprintw(13,columna_caja2 + 1, "Misc");
     attroff(COLOR_PAIR(6));
 
     //Crear Tercera Caja
     int y_caja3 = maximo_y - 12;
     int x_panel2 = x_panel - 20;
     int columna_inicial_caja3 = x_caja2 + 3;
-    WINDOW *panel_3 = newwin(y_caja3,x_panel2, 8,columna_inicial_caja3);
+    WINDOW *panel_3 = newwin(y_caja3,x_panel2, 6,columna_inicial_caja3);
     wbkgd(panel_3, COLOR_PAIR(1));
     attron(COLOR_PAIR(4));
     box(panel_3, 0, 0);
@@ -95,16 +94,16 @@ int main(){
     wrefresh(ventana);
 
     attron(COLOR_PAIR(3));//Color de primera linea en Caja 3
-    mvprintw(9, columna_inicial_caja3 + 1, "Patch CD Update");
+    mvprintw(7, columna_inicial_caja3 + 1, "Patch CD Update");
     attroff(COLOR_PAIR(3));
 
     //Resto de Info
     attron(COLOR_PAIR(6));
-    mvprintw(10, columna_inicial_caja3 + 1, "Installation into Directory");
-    mvprintw(11, columna_inicial_caja3 + 1, "Online Update");
-    mvprintw(12, columna_inicial_caja3 + 1, "Install and Remove Software");
-    mvprintw(13, columna_inicial_caja3 + 1, "Change Source of Installation");
-    mvprintw(14, columna_inicial_caja3 + 1, "System Update");
+    mvprintw(8, columna_inicial_caja3 + 1, "Installation into Directory");
+    mvprintw(9, columna_inicial_caja3 + 1, "Online Update");
+    mvprintw(10, columna_inicial_caja3 + 1, "Install and Remove Software");
+    mvprintw(11, columna_inicial_caja3 + 1, "Change Source of Installation");
+    mvprintw(12, columna_inicial_caja3 + 1, "System Update");
     attroff(COLOR_PAIR(6));
 
 
