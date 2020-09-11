@@ -4,6 +4,7 @@ using namespace std;
 
 int main(){
     initscr();
+    cbreak();
     if(!has_colors()){
         endwin();
         printw("La terminal no tiene opcion de mostrar color");
@@ -12,10 +13,14 @@ int main(){
     }
     int maximo_y, maximo_x;
     getmaxyx(stdscr, maximo_y, maximo_x);
+    WINDOW *ventana = newwin(maximo_y,maximo_x,0,0);
     start_color();
+    //Colores
     init_pair(1,COLOR_WHITE, COLOR_BLUE);
     init_pair(2, COLOR_BLACK, COLOR_CYAN);
-    WINDOW *ventana = newwin(maximo_y,maximo_x,0,0);
+    init_pair(3, COLOR_YELLOW, COLOR_BLUE);
+    init_pair(4, COLOR_WHITE, COLOR_BLUE);
+    //Cambiar color a ventana
     wbkgd(ventana, COLOR_PAIR(1));
     refresh();
     wrefresh(ventana);
@@ -30,11 +35,53 @@ int main(){
     }
     printw("Press F1 for Help ");
     attroff(COLOR_PAIR(2));
+    
+    int x_panel = maximo_x - 6;
+    //Crear primera caje que contiene "Control Center"
+    WINDOW *panel_1 = newwin(3,x_panel,3,3);
+    wbkgd(panel_1, COLOR_PAIR(1));
+    attron(COLOR_PAIR(4));
+    box(panel_1, 0, 0);
+    attroff(COLOR_PAIR(4));
+    refresh();
+    wrefresh(panel_1);
+    wrefresh(ventana);
+
+    //Escribir lo que ve en la caja
+    int mitad_panel1_x = ((3 + x_panel )/ 2 ) -11;
+    int mitad_panel1_y = (3 + 5 )/ 2;
+    attron(COLOR_PAIR(3));
+    mvprintw(mitad_panel1_y, mitad_panel1_x ,"YaST2 Control Center");
+    attroff(COLOR_PAIR(3));
+
+    //Crear segunda caja
+    WINDOW *panel_2 = newwin(12,20,8,3);
+    wbkgd(panel_2, COLOR_PAIR(1));
+    attron(COLOR_PAIR(4));
+    box(panel_2, 0, 0);
+    attroff(COLOR_PAIR(4));
+    refresh();
+    wrefresh(panel_2);
+    wrefresh(ventana);
+    //Color de Palabara Software
+    init_pair(5,COLOR_YELLOW, COLOR_CYAN);
+    //Color de Resto de Palabras
+    init_pair(6, COLOR_WHITE, COLOR_BLUE);
+    attron(COLOR_PAIR(5));
+    mvprintw(9,4, "Software          ");
+    attroff(COLOR_PAIR(5));
+    
+
+    attron(COLOR_PAIR(6));
+    mvprintw(10, 4, "Hardware");
+    mvprintw(11, 4, "System");
+    mvprintw(12, 4, "Network Devices");
+    mvprintw(13, 4, "Security and Users");
+    mvprintw(14, 4, "Misc");
+    attroff(COLOR_PAIR(6));
     move(20,20);
     getch();
     refresh();
-
-    
     endwin();
     return 0;
 }
