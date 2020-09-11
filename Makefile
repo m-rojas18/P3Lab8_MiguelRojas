@@ -1,5 +1,5 @@
 all:
 	g++ main.cpp \
-	-lncurses -o ventanas
+	-lncurses -o run
 clean:
-	rm ventanas
+	rm run
